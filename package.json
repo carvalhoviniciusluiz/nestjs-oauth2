@@ -1,70 +1,74 @@
 {
   "name": "nestjs-oauth2",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Oauth2 validation service",
+  "author": "Carvalho, Vinicius Luiz <carvalho.viniciusluiz@gmail.com>",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "build:tsc": "tsc -p tsconfig.build.json",
+    "update:packages": "yarn ncu -u",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "format-check": "prettier --check \"src/**/*.ts\"",
+    "dev": "NODE_ENV=development ts-node-dev --inspect=0.0.0.0:7001 --ignore-watch node_modules -r tsconfig-paths/register --respawn --transpile-only ./src/main.ts",
+    "start": "NODE_ENV=development nest start",
+    "start:dev": "yarn start --watch",
+    "start:debug": "yarn start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test": "cross-env NODE_PATH=./src NODE_ENV=test jest --maxWorkers=1",
+    "test:watch": "yarn test --watch",
+    "test:cov": "yarn test --coverage",
+    "test:staged": "yarn test --bail --findRelatedTests",
+    "test:debug": "cross-env NODE_PATH=./src NODE_ENV=test node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "yarn test --config ./test/jest-e2e.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "concurrently -r \"yarn format\" \"yarn lint\" \"yarn test:staged\" \"yarn tsc --noEmit\"",
+      "post-merge": "yarn",
+      "pre-push": "yarn test:cov"
+    }
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.15",
-    "@nestjs/core": "^7.6.15",
-    "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/common": "^7.6.17",
+    "@nestjs/core": "^7.6.17",
+    "@nestjs/mongoose": "^7.2.4",
+    "@nestjs/platform-express": "^7.6.17",
+    "add": "^2.0.6",
+    "cross-env": "^7.0.3",
+    "mongoose": "^5.12.12",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^7.1.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
-    "@nestjs/schematics": "^7.3.0",
-    "@nestjs/testing": "^7.6.15",
-    "@types/express": "^4.17.11",
-    "@types/jest": "^26.0.22",
-    "@types/node": "^14.14.36",
-    "@types/supertest": "^2.0.10",
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "@typescript-eslint/parser": "^4.19.0",
-    "eslint": "^7.22.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "jest": "^26.6.3",
-    "prettier": "^2.2.1",
+    "@nestjs/schematics": "^7.3.1",
+    "@nestjs/testing": "^7.6.17",
+    "@types/express": "^4.17.12",
+    "@types/jest": "^26.0.23",
+    "@types/mongoose": "^5.11.95",
+    "@types/node": "^15.12.0",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.0.4",
+    "jest-extended": "^0.11.5",
+    "npm-check-updates": "^11.6.0",
+    "prettier": "^2.3.0",
     "supertest": "^6.1.3",
-    "ts-jest": "^26.5.4",
-    "ts-loader": "^8.0.18",
-    "ts-node": "^9.1.1",
+    "ts-jest": "^27.0.2",
+    "ts-loader": "^9.2.2",
+    "ts-node": "^10.0.0",
+    "ts-node-dev": "^1.1.6",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.2.3"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "typescript": "^4.3.2"
   }
 }
