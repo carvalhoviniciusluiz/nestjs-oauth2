@@ -1,9 +1,10 @@
 import { Logger } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppLogger } from './app.logger';
 import { CorsOptions } from 'cors';
-import { AppModule } from './app.module';
+import { AppLogger } from 'app.logger';
+import { AppModule } from 'app.module';
+import { enableSwagger } from 'swagger.service';
 
 async function bootstrap() {
   const IS_DEV = process.env.NODE_ENV === 'development';
@@ -27,6 +28,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  enableSwagger(app);
 
   await app
     .listen(parseInt(port.toString(), 10), '0.0.0.0', () => {
