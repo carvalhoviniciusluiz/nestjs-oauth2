@@ -4,13 +4,14 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
+import { VERSION } from 'app.vars';
 
 export const enableSwagger = (app: INestApplication, path = 'api') => {
   const swaggerDocumentBuilder = new DocumentBuilder()
     .addBearerAuth()
     .setTitle('API OAuth2')
     .setDescription('This is our OAuth2 API')
-    .setVersion('1.0.0')
+    .setVersion(`1.${VERSION}`)
     .build();
 
   const swaggerDocumentOptions: SwaggerDocumentOptions = {
