@@ -3,15 +3,15 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { CorsOptions } from 'cors';
 import { AppLogger } from 'app.logger';
-import { AppModule } from 'app.module';
 import { enableSwagger } from 'swagger.service';
+import { ApplicationModule } from 'modules';
 
 class Main {
   static async bootstrap() {
     const IS_DEV = process.env.NODE_ENV === 'development';
     const port = process.env.PORT || 3333;
 
-    const app = await NestFactory.create(AppModule, {
+    const app = await NestFactory.create(ApplicationModule, {
       logger: new AppLogger(),
     });
 
