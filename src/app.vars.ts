@@ -18,6 +18,12 @@ export const POSTGRES_PORT = process.env.POSTGRES_PORT;
 export const POSTGRES_USER = process.env.POSTGRES_USER;
 export const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD;
 
+export const MONGO_DB = process.env.MONGO_DB;
+export const MONGO_HOST = process.env.MONGO_HOST;
+export const MONGO_PORT = process.env.MONGO_PORT;
+export const MONGO_USER = process.env.MONGO_USER;
+export const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
+
 if (NODE_ENV !== 'test') {
   console.table(ENV_FILE);
 }
