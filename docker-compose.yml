@@ -1,8 +1,8 @@
-version: '3'
+version: '3.7'
 
 services:
   web:
-    container_name: nestjs
+    container_name: oauth2_nestjs
     build: docker/dev
     ports:
       - "3333:3333"
@@ -12,10 +12,10 @@ services:
     volumes:
       - .:/server
     links:
-      - database
+      - postgres
 
-  database:
-    container_name: database
+  postgres:
+    container_name: oauth2_postgres
     image: postgres:13.3-alpine
     environment:
       - POSTGRES_DB=oauth2_development
@@ -25,3 +25,16 @@ services:
       - ./.data/postgresql:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+
+  mongo:
+    container_name: oauth2_mongo
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: oauth2_development
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./.data/mongodb:/data/db
