@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    container_name: nestjs
+    build: docker/dev
+    ports:
+      - "3333:3333"
+      - "7001:7001"
+    env_file:
+      - .env
+    volumes:
+      - .:/server
+    links:
+      - database
