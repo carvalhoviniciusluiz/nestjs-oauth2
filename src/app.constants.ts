@@ -7,7 +7,8 @@ const ENV_FILE = result.parsed || {};
 
 const configService = new ConfigService();
 
-export const VERSION = configService.get<string>('VERSION') || 'dev';
+export const VERSION = configService.get<string>('VERSION') || '1';
+export const MAJOR = configService.get<string>('MAJOR') || 'dev';
 
 export const NODE_ENV = configService.get<string>('NODE_ENV') || 'production';
 export const APP_PORT = configService.get<number>('APP_PORT') || 3333;
