@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ClientEntity } from './client.entity';
-import { OAuth2Request } from '../dto';
+import { OAuth2Request } from '../../application/dtos';
 
 @Entity('oauth_access_token')
 export class AccessTokenEntity {

@@ -1,4 +1,4 @@
-import { ClientEntity } from '../../entities';
+import { ClientEntity } from '../entities';
 
 /**
  * This is the main service you have to implement if you want to

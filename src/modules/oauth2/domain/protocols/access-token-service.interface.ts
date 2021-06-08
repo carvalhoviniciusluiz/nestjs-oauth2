@@ -1,4 +1,4 @@
-import { AccessTokenEntity } from '../../entities';
+import { AccessTokenEntity } from '../entities';
 
 /**
  * Main interface you have to implement if you want to deal with access tokens in your

@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { ClientNotFoundException, ClientServiceInterface } from '../domain';
+import { ClientNotFoundException, ClientServiceInterface } from '..';
 import { ClientEntity } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
 

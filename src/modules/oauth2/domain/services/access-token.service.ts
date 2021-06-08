@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import { AccessTokenNotFoundException, AccessTokenServiceInterface } from '../domain';
+import { AccessTokenNotFoundException, AccessTokenServiceInterface } from '..';
 import { AccessTokenEntity } from '../entities';
 
 @Injectable()

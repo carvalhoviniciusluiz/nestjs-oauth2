@@ -1,2 +1,2 @@
-export * from './client-service.interface';
-export * from './access-token-service.interface';
+export * from './client.service';
+export * from './access-token.service';

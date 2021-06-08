@@ -1,6 +1,6 @@
 import { Body, ClassSerializerInterceptor, Controller, Inject, Post, UseInterceptors } from '@nestjs/common';
-import { ClientServiceInterface } from '../domain';
-import { OAuth2Request } from '../dto';
+import { ClientServiceInterface } from '../../domain';
+import { OAuth2Request } from '../dtos';
 
 @Controller('oauth2')
 @UseInterceptors(ClassSerializerInterceptor)

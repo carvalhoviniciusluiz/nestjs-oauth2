@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Module, Type } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } from 'app.constants';
-import { Oauth2Controller } from './controllers';
-import { AccessTokenEntity, ClientEntity } from './entities';
-import { AccessTokenService, ClientService } from './services';
+import { Oauth2Controller } from './application/controllers';
+import { AccessTokenEntity, ClientEntity, AccessTokenService, ClientService } from './domain';
+
+const controllers: Type<any>[] = [Oauth2Controller];
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { AccessTokenService, ClientService } from './services';
     { provide: 'ClientServiceInterface', useClass: ClientService },
     { provide: 'AccessTokenServiceInterface', useClass: AccessTokenService }
   ],
-  controllers: [Oauth2Controller],
+  controllers: [...controllers],
   exports: [TypeOrmModule]
 })
 export class OAuth2Module {}
