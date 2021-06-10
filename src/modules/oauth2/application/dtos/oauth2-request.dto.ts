@@ -9,8 +9,7 @@ export class OAuth2Request {
   @ApiProperty({
     type: String,
     description: 'The type of grant you are requesting, must be "client_credentials"',
-    required: true,
-    name: 'grant_type'
+    required: true
   })
   @IsNotEmpty()
   @Expose({ name: 'grant_type' })
@@ -19,8 +18,7 @@ export class OAuth2Request {
   @ApiProperty({
     type: String,
     description: 'The API Key given by the application',
-    required: true,
-    name: 'client_id'
+    required: true
   })
   @IsNotEmpty()
   @Expose({ name: 'client_id' })
@@ -29,8 +27,7 @@ export class OAuth2Request {
   @ApiProperty({
     type: String,
     description: 'The API Token given by the application',
-    required: true,
-    name: 'client_secret'
+    required: true
   })
   @Expose({ name: 'client_secret' })
   clientSecret: string;
