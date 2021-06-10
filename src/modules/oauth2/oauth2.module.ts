@@ -2,17 +2,18 @@ import { Module, OnModuleInit, Type } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Oauth2Controller } from './application/controllers';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ClientCredentialsStrategy, RefreshTokenStrategy } from './infrastructure/strategies';
+import { ClientCredentialsStrategy, RefreshTokenStrategy, PasswordStrategy } from './infrastructure/strategies';
 import { CreateAccessTokenHandler } from './infrastructure/commands';
 import { AccessTokenCreatedEventHandler } from './infrastructure/events';
 import { ClientEntity, AccessTokenEntity } from './infrastructure/entities';
 import { AccessTokenService, ClientService } from './infrastructure/services';
 import { Oauth2GrantStrategyRegistry, StrategyExplorer } from './infrastructure/core';
 import { POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } from 'app.constants';
+import { UserValidator } from './infrastructure/validators';
 
 const controllers: Type<any>[] = [Oauth2Controller];
 
-export const Oauth2Strategies = [ClientCredentialsStrategy, RefreshTokenStrategy];
+export const Oauth2Strategies = [ClientCredentialsStrategy, RefreshTokenStrategy, PasswordStrategy];
 
 export const CommandHandlers = [CreateAccessTokenHandler];
 export const EventHandlers = [AccessTokenCreatedEventHandler];
@@ -38,6 +39,7 @@ export const EventHandlers = [AccessTokenCreatedEventHandler];
     TypeOrmModule.forFeature([ClientEntity, AccessTokenEntity])
   ],
   providers: [
+    { provide: 'UserValidatorInterface', useClass: UserValidator },
     { provide: 'ClientServiceInterface', useClass: ClientService },
     { provide: 'AccessTokenServiceInterface', useClass: AccessTokenService },
     StrategyExplorer,
