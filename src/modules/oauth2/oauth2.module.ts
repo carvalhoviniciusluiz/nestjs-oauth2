@@ -2,7 +2,7 @@ import { Module, OnModuleInit, Type } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Oauth2Controller } from './application/controllers';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ClientCredentialsStrategy } from './infrastructure/strategies';
+import { ClientCredentialsStrategy, RefreshTokenStrategy } from './infrastructure/strategies';
 import { CreateAccessTokenHandler } from './infrastructure/commands';
 import { AccessTokenCreatedEventHandler } from './infrastructure/events';
 import { ClientEntity, AccessTokenEntity } from './infrastructure/entities';
@@ -12,7 +12,7 @@ import { POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_
 
 const controllers: Type<any>[] = [Oauth2Controller];
 
-export const Oauth2Strategies = [ClientCredentialsStrategy];
+export const Oauth2Strategies = [ClientCredentialsStrategy, RefreshTokenStrategy];
 
 export const CommandHandlers = [CreateAccessTokenHandler];
 export const EventHandlers = [AccessTokenCreatedEventHandler];
