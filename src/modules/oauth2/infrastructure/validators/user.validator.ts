@@ -1,18 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { UserValidatorInterface } from 'modules/oauth2/domain/validators';
-import { UserInterface } from 'modules/oauth2/domain/payloads';
+import { UserInterface } from 'modules/oauth2/domain/payloaders';
+import { InvalidUserException } from 'modules/oauth2/domain/exceptions';
 
 @Injectable()
 export class UserValidator implements UserValidatorInterface {
   validate(username: string, password: string): Promise<UserInterface> {
-    console.log({ username, password });
+    if (username === 'bob' && password === 'bob') {
+      const user = {
+        id: '123',
+        username: 'bob',
+        email: 'bob@change.me'
+      };
 
-    const user: UserInterface = {
-      id: 'xxxx',
-      username: 'xxxx',
-      email: 'xxxx@xxx.com'
-    };
+      return Promise.resolve(user);
+    }
 
-    return Promise.resolve(user);
+    throw InvalidUserException.withUsernameAndPassword(username, password);
   }
 }
