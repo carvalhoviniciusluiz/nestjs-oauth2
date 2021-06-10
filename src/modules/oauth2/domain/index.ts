@@ -1,4 +1,3 @@
-export * from './entities';
-export * from './exception';
-export * from './protocols';
+export * from './exceptions';
 export * from './services';
+export * from './strategies';

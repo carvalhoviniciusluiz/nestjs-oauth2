@@ -1,4 +1,4 @@
-import { ClientEntity } from '../entities';
+import { ClientEntity } from 'modules/oauth2/infrastructure/entities';
 
 /**
  * This is the main service you have to implement if you want to
