@@ -11,7 +11,7 @@ import { Oauth2GrantStrategyRegistry } from 'modules/oauth2/infrastructure';
 import { ClientServiceInterface } from 'modules/oauth2/domain';
 import { OAuth2Request } from 'modules/oauth2/application';
 
-@Controller('oauth2')
+@Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class Oauth2Controller {
   /**
