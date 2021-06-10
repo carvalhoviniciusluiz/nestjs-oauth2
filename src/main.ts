@@ -21,8 +21,7 @@ class Main {
       new ValidationPipe({
         transform: true,
         disableErrorMessages: IS_PROD,
-        forbidUnknownValues: true,
-        whitelist: true
+        forbidUnknownValues: true
       })
     );
 
