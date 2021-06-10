@@ -1,4 +1,4 @@
-import { UserInterface } from '../payloads/user.interface';
+import { UserInterface } from '../payloaders/user.interface';
 
 /**
  * Validates that the usernanme exists and has the given password
