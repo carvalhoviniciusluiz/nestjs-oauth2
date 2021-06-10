@@ -4,18 +4,20 @@ import { RouterModule } from 'nest-router';
 // import { AdminModule } from './admin/admin.module';
 // import { AppModule as ApplicationModule } from './app/app.module';
 import { OAuth2Module } from './oauth2/oauth2.module';
-// import { ApplicationModule as OAuth2Module } from './oauth2/application/application.module';
+import { AuthorizeModule } from './authorize/authorize.module';
 
 @Module({
   imports: [
     RouterModule.forRoutes([
       // { path: '/admin', module: AdminModule },
       // { path: '/', module: ApplicationModule },
-      { path: '/v1', module: OAuth2Module }
+      { path: '/v1/authorize', module: AuthorizeModule },
+      { path: '/v1/oauth2', module: OAuth2Module }
     ]),
     // AdminModule,
     // ApplicationModule,
-    OAuth2Module
+    OAuth2Module,
+    AuthorizeModule
   ]
 })
 export class AppModule {}
