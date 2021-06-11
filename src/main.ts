@@ -5,15 +5,15 @@ import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { useContainer } from 'typeorm';
-import { AppLogger } from 'app.logger';
 import { enableCors } from 'cors.service';
 import { enableSwagger } from 'swagger.service';
-import { AppModule } from 'modules';
+import { AppLogger } from 'app.logger';
+import { AppsModule } from 'apps/apps.module';
 import { IS_PROD, APP_PORT, APP_HOST } from 'app.constants';
 
 class Main {
   static async bootstrap() {
-    const app = await NestFactory.create(AppModule, new ExpressAdapter(), {
+    const app = await NestFactory.create(AppsModule, new ExpressAdapter(), {
       logger: new AppLogger()
     });
 
@@ -30,7 +30,7 @@ class Main {
     enableSwagger(app);
 
     //is used for allow custom pipes attribute
-    useContainer(app.select(AppModule), { fallbackOnErrors: true });
+    useContainer(app.select(AppsModule), { fallbackOnErrors: true });
 
     app.use(helmet());
     app.use(rateLimit({ windowMs: 60 * 1000, max: 1000 }));
