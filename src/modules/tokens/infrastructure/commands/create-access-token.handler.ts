@@ -1,10 +1,10 @@
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import * as crypto from 'crypto';
-import { AccessTokenServiceInterface, ClientServiceInterface } from 'modules/oauth2/domain/services';
-import { AccessTokenCreatedEvent } from 'modules/oauth2/infrastructure/events';
-import { CreateAccessTokenCommand } from 'modules/oauth2/infrastructure/commands';
-import { ClientEntity, AccessTokenEntity } from 'modules/oauth2/infrastructure/entities';
+import { AccessTokenServiceInterface, ClientServiceInterface } from 'modules/tokens/domain/services';
+import { AccessTokenCreatedEvent } from 'modules/tokens/infrastructure/events';
+import { CreateAccessTokenCommand } from 'modules/tokens/infrastructure/commands';
+import { ClientEntity, AccessTokenEntity } from 'modules/tokens/infrastructure/entities';
 
 @CommandHandler(CreateAccessTokenCommand)
 export class CreateAccessTokenHandler implements ICommandHandler<CreateAccessTokenCommand> {

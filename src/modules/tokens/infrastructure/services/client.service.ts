@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClientNotFoundException } from 'modules/oauth2/domain/exceptions';
-import { ClientServiceInterface } from 'modules/oauth2/domain/services';
-import { ClientEntity } from 'modules/oauth2/infrastructure/entities';
+import { ClientNotFoundException } from 'modules/tokens/domain/exceptions';
+import { ClientServiceInterface } from 'modules/tokens/domain/services';
+import { ClientEntity } from 'modules/tokens/infrastructure/entities';
 
 @Injectable()
 export class ClientService implements ClientServiceInterface {

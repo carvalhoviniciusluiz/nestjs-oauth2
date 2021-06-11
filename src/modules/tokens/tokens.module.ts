@@ -51,7 +51,7 @@ export const EventHandlers = [AccessTokenCreatedEventHandler];
   controllers: [...controllers],
   exports: [TypeOrmModule]
 })
-export class OAuth2Module implements OnModuleInit {
+export class TokensModule implements OnModuleInit {
   constructor(
     private readonly explorerService: StrategyExplorer,
     private readonly strategyRegistry: Oauth2GrantStrategyRegistry

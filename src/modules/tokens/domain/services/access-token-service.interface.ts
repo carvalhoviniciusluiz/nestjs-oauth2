@@ -1,4 +1,4 @@
-import { AccessTokenEntity } from 'modules/oauth2/infrastructure/entities';
+import { AccessTokenEntity } from 'modules/tokens/infrastructure/entities';
 
 /**
  * Main interface you have to implement if you want to deal with access tokens in your

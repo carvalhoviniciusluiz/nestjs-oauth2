@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UserValidatorInterface } from 'modules/oauth2/domain/validators';
-import { UserInterface } from 'modules/oauth2/domain/payloaders';
-import { InvalidUserException } from 'modules/oauth2/domain/exceptions';
+import { UserValidatorInterface } from 'modules/tokens/domain/validators';
+import { UserInterface } from 'modules/tokens/domain/payloaders';
+import { InvalidUserException } from 'modules/tokens/domain/exceptions';
 
 @Injectable()
 export class UserValidator implements UserValidatorInterface {

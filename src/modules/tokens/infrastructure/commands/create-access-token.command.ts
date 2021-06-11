@@ -1,7 +1,7 @@
 /**
  * Create an access token
  */
-import { OAuth2Request } from 'modules/oauth2/application/dtos';
+import { OAuth2Request } from 'modules/tokens/application/dtos';
 
 export class CreateAccessTokenCommand {
   constructor(

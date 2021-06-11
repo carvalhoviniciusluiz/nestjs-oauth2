@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UserLoaderInterface } from 'modules/oauth2/domain/loaders';
-import { UserInterface } from 'modules/oauth2/domain/payloaders';
-import { InvalidUserException } from 'modules/oauth2/domain/exceptions';
+import { UserLoaderInterface } from 'modules/tokens/domain/loaders';
+import { UserInterface } from 'modules/tokens/domain/payloaders';
+import { InvalidUserException } from 'modules/tokens/domain/exceptions';
 
 @Injectable()
 export class UserLoader implements UserLoaderInterface {

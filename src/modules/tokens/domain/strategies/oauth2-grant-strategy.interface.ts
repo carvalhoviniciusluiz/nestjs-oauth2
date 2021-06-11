@@ -1,5 +1,5 @@
-import { OAuth2Request, OAuth2Response } from 'modules/oauth2/application/dtos';
-import { ClientEntity } from 'modules/oauth2/infrastructure/entities';
+import { OAuth2Request, OAuth2Response } from 'modules/tokens/application/dtos';
+import { ClientEntity } from 'modules/tokens/infrastructure/entities';
 
 /**
  * Implement this interface to provide an oauth2 grant type handler. Handlers must be registered using the

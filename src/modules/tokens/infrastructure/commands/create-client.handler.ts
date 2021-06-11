@@ -3,10 +3,10 @@ import { Inject } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import * as crypto from 'crypto';
 import * as selfsigned from 'selfsigned';
-import { CreateClientCommand } from 'modules/oauth2/infrastructure/commands';
-import { ClientServiceInterface } from 'modules/oauth2/domain/services';
-import { ClientEntity } from 'modules/oauth2/infrastructure/entities';
-import { ClientCreatedEvent } from 'modules/oauth2/infrastructure/events';
+import { CreateClientCommand } from 'modules/tokens/infrastructure/commands';
+import { ClientServiceInterface } from 'modules/tokens/domain/services';
+import { ClientEntity } from 'modules/tokens/infrastructure/entities';
+import { ClientCreatedEvent } from 'modules/tokens/infrastructure/events';
 
 @CommandHandler(CreateClientCommand)
 export class CreateClientHandler implements ICommandHandler<CreateClientCommand> {

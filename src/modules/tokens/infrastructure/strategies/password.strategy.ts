@@ -1,11 +1,11 @@
 import { Inject } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { Oauth2GrantStrategyInterface } from 'modules/oauth2/domain';
-import { Oauth2GrantStrategy } from 'modules/oauth2/infrastructure/core/decorators';
-import { OAuth2Request, OAuth2Response } from 'modules/oauth2/application/dtos';
-import { AccessTokenEntity, ClientEntity } from 'modules/oauth2/infrastructure/entities';
-import { UserValidatorInterface } from 'modules/oauth2/domain/validators';
-import { CreateAccessTokenCommand } from 'modules/oauth2/infrastructure/commands';
+import { Oauth2GrantStrategyInterface } from 'modules/tokens/domain';
+import { Oauth2GrantStrategy } from 'modules/tokens/infrastructure/core/decorators';
+import { OAuth2Request, OAuth2Response } from 'modules/tokens/application/dtos';
+import { AccessTokenEntity, ClientEntity } from 'modules/tokens/infrastructure/entities';
+import { UserValidatorInterface } from 'modules/tokens/domain/validators';
+import { CreateAccessTokenCommand } from 'modules/tokens/infrastructure/commands';
 
 @Oauth2GrantStrategy('password')
 export class PasswordStrategy implements Oauth2GrantStrategyInterface {

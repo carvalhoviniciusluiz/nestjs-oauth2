@@ -1,9 +1,9 @@
 import { CommandBus } from '@nestjs/cqrs';
-import { OAuth2Request, OAuth2Response } from 'modules/oauth2/application/dtos';
-import { Oauth2GrantStrategyInterface } from 'modules/oauth2/domain/strategies';
-import { CreateAccessTokenCommand } from 'modules/oauth2/infrastructure/commands';
-import { AccessTokenEntity, ClientEntity } from 'modules/oauth2/infrastructure/entities';
-import { Oauth2GrantStrategy } from 'modules/oauth2/infrastructure/core/decorators';
+import { OAuth2Request, OAuth2Response } from 'modules/tokens/application/dtos';
+import { Oauth2GrantStrategyInterface } from 'modules/tokens/domain/strategies';
+import { CreateAccessTokenCommand } from 'modules/tokens/infrastructure/commands';
+import { AccessTokenEntity, ClientEntity } from 'modules/tokens/infrastructure/entities';
+import { Oauth2GrantStrategy } from 'modules/tokens/infrastructure/core/decorators';
 
 @Oauth2GrantStrategy('client_credentials')
 export class ClientCredentialsStrategy implements Oauth2GrantStrategyInterface {

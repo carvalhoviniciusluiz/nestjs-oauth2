@@ -1,8 +1,8 @@
 import { HttpException, Injectable, Type } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Oauth2GrantStrategyInterface } from 'modules/oauth2/domain/strategies';
-import { OAuth2Request, OAuth2Response } from 'modules/oauth2/application/dtos';
-import { ClientEntity } from 'modules/oauth2/infrastructure/entities';
+import { Oauth2GrantStrategyInterface } from 'modules/tokens/domain/strategies';
+import { OAuth2Request, OAuth2Response } from 'modules/tokens/application/dtos';
+import { ClientEntity } from 'modules/tokens/infrastructure/entities';
 import { OAUTH2_STRATEGY_METADATA } from './strategy.constants';
 
 export type Oauth2GrantStrategyType = Type<Oauth2GrantStrategyInterface>;

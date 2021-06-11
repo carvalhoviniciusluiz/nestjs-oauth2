@@ -2,7 +2,7 @@ import { Injectable, Type } from '@nestjs/common';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 import { Module } from '@nestjs/core/injector/module';
 import { ModulesContainer } from '@nestjs/core/injector/modules-container';
-import { Oauth2GrantStrategyInterface } from 'modules/oauth2/domain/strategies';
+import { Oauth2GrantStrategyInterface } from 'modules/tokens/domain/strategies';
 import { OAUTH2_STRATEGY_METADATA } from './strategy.constants';
 
 export interface Oauth2StrategyOptions {
