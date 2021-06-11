@@ -13,10 +13,18 @@ import { UserValidator } from './infrastructure/validators';
 
 const controllers: Type<any>[] = [Oauth2Controller];
 
-export const Oauth2Strategies = [ClientCredentialsStrategy, RefreshTokenStrategy, PasswordStrategy];
+const Oauth2Core = [StrategyExplorer, Oauth2GrantStrategyRegistry];
 
-export const CommandHandlers = [CreateAccessTokenHandler];
-export const EventHandlers = [AccessTokenCreatedEventHandler];
+const Oauth2Strategies = [ClientCredentialsStrategy, RefreshTokenStrategy, PasswordStrategy];
+
+const Oauth2Services = [
+  { provide: 'ClientServiceInterface', useClass: ClientService },
+  { provide: 'AccessTokenServiceInterface', useClass: AccessTokenService }
+];
+
+const Oauth2CommandHandlers = [CreateAccessTokenHandler];
+
+const Oauth2EventHandlers = [AccessTokenCreatedEventHandler];
 
 @Module({
   imports: [
@@ -40,13 +48,11 @@ export const EventHandlers = [AccessTokenCreatedEventHandler];
   ],
   providers: [
     { provide: 'UserValidatorInterface', useClass: UserValidator },
-    { provide: 'ClientServiceInterface', useClass: ClientService },
-    { provide: 'AccessTokenServiceInterface', useClass: AccessTokenService },
-    StrategyExplorer,
-    Oauth2GrantStrategyRegistry,
+    ...Oauth2Services,
+    ...Oauth2Core,
     ...Oauth2Strategies,
-    ...CommandHandlers,
-    ...EventHandlers
+    ...Oauth2CommandHandlers,
+    ...Oauth2EventHandlers
   ],
   controllers: [...controllers],
   exports: [TypeOrmModule]
