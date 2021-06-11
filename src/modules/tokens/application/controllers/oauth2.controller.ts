@@ -7,9 +7,9 @@ import {
   Post,
   UseInterceptors
 } from '@nestjs/common';
-import { Oauth2GrantStrategyRegistry } from 'modules/oauth2/infrastructure';
-import { ClientServiceInterface } from 'modules/oauth2/domain';
-import { OAuth2Request } from 'modules/oauth2/application';
+import { Oauth2GrantStrategyRegistry } from 'modules/tokens/infrastructure';
+import { ClientServiceInterface } from 'modules/tokens/domain';
+import { OAuth2Request } from 'modules/tokens/application';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -26,7 +26,7 @@ export class Oauth2Controller {
     private readonly strategyRegistry: Oauth2GrantStrategyRegistry
   ) {}
 
-  @Post('token')
+  @Post()
   async token(@Body() request: OAuth2Request) {
     const client = await this.clientService.findByClientId(request.clientId);
 

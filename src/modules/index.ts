@@ -3,7 +3,7 @@ import { RouterModule } from 'nest-router';
 
 // import { AdminModule } from './admin/admin.module';
 // import { AppModule as ApplicationModule } from './app/app.module';
-import { OAuth2Module } from './oauth2/oauth2.module';
+import { TokensModule } from './tokens/tokens.module';
 import { AuthorizeModule } from './authorize/authorize.module';
 
 @Module({
@@ -12,11 +12,11 @@ import { AuthorizeModule } from './authorize/authorize.module';
       // { path: '/admin', module: AdminModule },
       // { path: '/', module: ApplicationModule },
       { path: '/v1/authorize', module: AuthorizeModule },
-      { path: '/v1/oauth2', module: OAuth2Module }
+      { path: '/v1/tokens', module: TokensModule }
     ]),
     // AdminModule,
     // ApplicationModule,
-    OAuth2Module,
+    TokensModule,
     AuthorizeModule
   ]
 })
