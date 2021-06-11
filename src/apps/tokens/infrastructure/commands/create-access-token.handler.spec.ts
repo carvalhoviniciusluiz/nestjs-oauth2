@@ -1,13 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CqrsModule, EventBus } from '@nestjs/cqrs';
 import { v4 as uuid } from 'uuid';
-import {
-  CreateAccessTokenCommand,
-  CreateAccessTokenHandler
-} from '../../../../../src/apps/tokens/infrastructure/commands';
-import { OAuth2Request } from '../../../../../src/apps/tokens/application/dtos';
-import { AccessTokenEntity, ClientEntity } from '../../../../../src/apps/tokens/infrastructure/entities';
-import { AccessTokenCreatedEvent } from '../../../../../src/apps/tokens/infrastructure/events';
+import { CreateAccessTokenCommand, CreateAccessTokenHandler } from '../commands';
+import { OAuth2Request } from '../../application/dtos';
+import { AccessTokenEntity, ClientEntity } from '../entities';
+import { AccessTokenCreatedEvent } from '../events';
 
 function mockDateNow() {
   // mock now = 1462361249717ms = 4th May 2016

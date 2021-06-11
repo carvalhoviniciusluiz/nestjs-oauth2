@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CqrsModule, EventBus } from '@nestjs/cqrs';
 import { v4 as uuid } from 'uuid';
-import { CreateClientCommand, CreateClientHandler } from '../../../../../src/apps/tokens/infrastructure/commands';
-import { ClientEntity } from '../../../../../src/apps/tokens/infrastructure/entities';
-import { ClientCreatedEvent } from '../../../../../src/apps/tokens/infrastructure/events';
+import { CreateClientCommand, CreateClientHandler } from '../commands';
+import { ClientEntity } from '../entities';
+import { ClientCreatedEvent } from '../events';
 
 describe('Create Client Command Handler', () => {
   let app: TestingModule;
