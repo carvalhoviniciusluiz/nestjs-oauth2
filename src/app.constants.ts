@@ -15,6 +15,7 @@ export const APP_PORT = configService.get<number>('APP_PORT') || 3333;
 export const APP_HOST = configService.get<string>('APP_HOST') || '0.0.0.0';
 
 export const IS_PROD = NODE_ENV === 'production';
+export const IS_TEST = NODE_ENV === 'test';
 
 export const POSTGRES_DB = configService.get<string>('POSTGRES_DB');
 export const POSTGRES_HOST = configService.get<string>('POSTGRES_HOST');
@@ -28,6 +29,9 @@ export const MONGO_PORT = configService.get<number>('MONGO_PORT');
 export const MONGO_USER = configService.get<string>('MONGO_USER');
 export const MONGO_PASSWORD = configService.get<string>('MONGO_PASSWORD');
 
-if (NODE_ENV !== 'test') {
+export const TOKEN_STRATEGY_METADATA = '__tokenGrantStrategy__';
+export const AUTHORIZE_STRATEGY_METADATA = '__authorizeGrantStrategy__';
+
+if (!IS_TEST) {
   console.table(ENV_FILE);
 }
