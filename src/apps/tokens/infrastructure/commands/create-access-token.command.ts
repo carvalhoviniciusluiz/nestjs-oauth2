@@ -1,7 +1,7 @@
 /**
  * Create an access token
  */
-import { OAuth2Request } from 'apps/tokens/application/dtos';
+import { TokenRequest } from 'apps/tokens/application/dtos';
 
 export class CreateAccessTokenCommand {
   constructor(
@@ -9,7 +9,7 @@ export class CreateAccessTokenCommand {
     public readonly scope: string,
     public readonly exp: number,
     public readonly iat: number,
-    public readonly request: OAuth2Request,
+    public readonly request: TokenRequest,
     public readonly userId?: string
   ) {}
 }

@@ -1,11 +1,11 @@
 import { CommandBus } from '@nestjs/cqrs';
-import { OAuth2Request, OAuth2Response } from 'apps/tokens/application/dtos';
-import { Oauth2GrantStrategyInterface } from 'apps/tokens/domain/strategies';
+import { Oauth2GrantStrategyInterface } from 'apps/@core/protocols';
+import { TokenRequest, TokenResponse } from 'apps/tokens/application/dtos';
 import { CreateAccessTokenCommand } from 'apps/tokens/infrastructure/commands';
 import { AccessTokenEntity, ClientEntity } from 'apps/tokens/infrastructure/entities';
-import { Oauth2GrantStrategy } from 'apps/tokens/infrastructure/core/decorators';
+import { TokenGrantStrategy } from 'apps/tokens/infrastructure/decorators';
 
-@Oauth2GrantStrategy('client_credentials')
+@TokenGrantStrategy('client_credentials')
 export class ClientCredentialsStrategy implements Oauth2GrantStrategyInterface {
   /**
    * Constructor
@@ -14,7 +14,7 @@ export class ClientCredentialsStrategy implements Oauth2GrantStrategyInterface {
    */
   constructor(private readonly commandBus: CommandBus) {}
 
-  async validate(request: OAuth2Request, client: ClientEntity): Promise<boolean> {
+  async validate(request: TokenRequest, client: ClientEntity): Promise<boolean> {
     if (
       client.clientSecret !== request.clientSecret ||
       !request.clientSecret ||
@@ -31,14 +31,14 @@ export class ClientCredentialsStrategy implements Oauth2GrantStrategyInterface {
     return requestScopes?.every(scope => clientScopes.includes(scope));
   }
 
-  async getOauth2Response(request: OAuth2Request, client: ClientEntity): Promise<OAuth2Response> {
+  async getOauth2Response(request: TokenRequest, client: ClientEntity): Promise<TokenResponse> {
     const requestScopes = typeof request.scopes === 'string' ? [request.scopes] : request.scopes;
 
     const accessToken: AccessTokenEntity = await this.commandBus.execute(
       new CreateAccessTokenCommand(client.id, JSON.stringify(requestScopes), request.exp, request.iat, request)
     );
 
-    return new OAuth2Response(
+    return new TokenResponse(
       accessToken?.accessToken,
       accessToken?.refreshToken,
       ~~((accessToken?.accessTokenExpiresAt.getTime() - Date.now()) / 1000),

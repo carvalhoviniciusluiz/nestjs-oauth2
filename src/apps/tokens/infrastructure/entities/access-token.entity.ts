@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ClientEntity } from './client.entity';
-import { OAuth2Request } from 'apps/tokens/application/dtos';
+import { TokenRequest } from 'apps/tokens/application/dtos';
 
 @Entity('oauth_access_token')
 export class AccessTokenEntity {
@@ -46,5 +46,5 @@ export class AccessTokenEntity {
   createdAt: Date;
 
   @Column({ name: 'created_from', type: 'jsonb', nullable: true })
-  createdFrom: OAuth2Request;
+  createdFrom: TokenRequest;
 }

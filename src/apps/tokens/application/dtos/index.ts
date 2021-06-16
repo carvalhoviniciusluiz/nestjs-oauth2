@@ -1,2 +1,2 @@
-export * from './oauth2-request.dto';
-export * from './oauth2-response.dto';
+export * from './token-request.dto';
+export * from './token-response.dto';

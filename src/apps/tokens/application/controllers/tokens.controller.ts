@@ -7,13 +7,13 @@ import {
   Post,
   UseInterceptors
 } from '@nestjs/common';
-import { Oauth2GrantStrategyRegistry } from 'apps/tokens/infrastructure';
+import { StrategyRegistry } from 'apps/tokens/infrastructure';
 import { ClientServiceInterface } from 'apps/tokens/domain';
-import { OAuth2Request } from 'apps/tokens/application';
+import { TokenRequest } from 'apps/tokens/application';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
-export class Oauth2Controller {
+export class TokensController {
   /**
    * Constructor
    *
@@ -23,11 +23,11 @@ export class Oauth2Controller {
   constructor(
     @Inject('ClientServiceInterface')
     private readonly clientService: ClientServiceInterface,
-    private readonly strategyRegistry: Oauth2GrantStrategyRegistry
+    private readonly strategyRegistry: StrategyRegistry
   ) {}
 
   @Post()
-  async token(@Body() request: OAuth2Request) {
+  async token(@Body() request: TokenRequest) {
     const client = await this.clientService.findByClientId(request.clientId);
 
     if (!(await this.strategyRegistry.validate(request, client))) {

@@ -4,7 +4,7 @@ import { Exclude, Expose } from 'class-transformer';
 /**
  * Main object used to transport data
  */
-export class OAuth2Response {
+export class TokenResponse {
   @ApiProperty({
     type: String,
     description: 'The generated access token',

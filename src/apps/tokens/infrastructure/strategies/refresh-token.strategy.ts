@@ -1,13 +1,13 @@
 import { Inject, UnauthorizedException } from '@nestjs/common';
-import { Oauth2GrantStrategyInterface } from 'apps/tokens/domain';
-import { Oauth2GrantStrategy } from 'apps/tokens/infrastructure/core/decorators';
-import { OAuth2Request, OAuth2Response } from 'apps/tokens/application/dtos';
+import { CommandBus } from '@nestjs/cqrs';
+import { Oauth2GrantStrategyInterface } from 'apps/@core/protocols';
+import { TokenRequest, TokenResponse } from 'apps/tokens/application/dtos';
 import { AccessTokenServiceInterface } from 'apps/tokens/domain/services';
 import { AccessTokenEntity, ClientEntity } from 'apps/tokens/infrastructure/entities';
 import { CreateAccessTokenCommand } from 'apps/tokens/infrastructure/commands';
-import { CommandBus } from '@nestjs/cqrs';
+import { TokenGrantStrategy } from 'apps/tokens/infrastructure/decorators';
 
-@Oauth2GrantStrategy('refresh_token')
+@TokenGrantStrategy('refresh_token')
 export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
   /**
    * Constructor
@@ -21,7 +21,7 @@ export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
     private readonly commandBus: CommandBus
   ) {}
 
-  async validate(request: OAuth2Request, client: ClientEntity): Promise<boolean> {
+  async validate(request: TokenRequest, client: ClientEntity): Promise<boolean> {
     if (
       (client.clientSecret && client.clientSecret !== request.clientSecret) ||
       client.deletedAt !== null ||
@@ -33,7 +33,7 @@ export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
     return true;
   }
 
-  async getOauth2Response(request: OAuth2Request, client: ClientEntity): Promise<OAuth2Response> {
+  async getOauth2Response(request: TokenRequest, client: ClientEntity): Promise<TokenResponse> {
     const expiredToken = await this.accessTokenRepository.findByRefreshToken(request.refreshToken);
 
     if (expiredToken.refreshTokenExpiresAt < new Date(Date.now()) || expiredToken.client.clientId !== client.clientId) {
@@ -55,12 +55,12 @@ export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
           exp,
           iat,
           scopes: JSON.parse(expiredToken.scope)
-        } as OAuth2Request,
+        } as TokenRequest,
         expiredToken.userId !== null ? expiredToken.userId : undefined
       )
     );
 
-    return new OAuth2Response(
+    return new TokenResponse(
       accessToken.accessToken,
       accessToken.refreshToken,
       ~~((accessToken.accessTokenExpiresAt.getTime() - Date.now()) / 1000),

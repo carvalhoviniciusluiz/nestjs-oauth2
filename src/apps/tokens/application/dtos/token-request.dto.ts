@@ -5,7 +5,7 @@ import { Expose } from 'class-transformer';
 /**
  * Main object used to transport data
  */
-export class OAuth2Request {
+export class TokenRequest {
   @ApiProperty({
     type: String,
     description: 'The type of grant you are requesting, must be "client_credentials"',

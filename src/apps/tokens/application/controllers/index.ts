@@ -1,1 +1,1 @@
-export * from './oauth2.controller';
+export * from './tokens.controller';

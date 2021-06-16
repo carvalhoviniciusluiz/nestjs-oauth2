@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CqrsModule, EventBus } from '@nestjs/cqrs';
 import { v4 as uuid } from 'uuid';
 import { CreateAccessTokenCommand, CreateAccessTokenHandler } from '../commands';
-import { OAuth2Request } from '../../application/dtos';
+import { TokenRequest } from '../../application/dtos';
 import { AccessTokenEntity, ClientEntity } from '../entities';
 import { AccessTokenCreatedEvent } from '../events';
 
@@ -70,7 +70,7 @@ describe('Create AccessToken Command Handler', () => {
         exp: Date.now() + 3600,
         iat: Date.now(),
         scopes: ['app-1', 'app-2']
-      } as OAuth2Request)
+      } as TokenRequest)
     );
 
     expect(serviceSpy).toBeCalledWith(expect.any(AccessTokenEntity));
@@ -89,7 +89,7 @@ describe('Create AccessToken Command Handler', () => {
         exp: Date.now() + 3600,
         iat: Date.now(),
         scopes: ['app-1', 'app-2']
-      } as OAuth2Request)
+      } as TokenRequest)
     );
 
     expect(publishSpy).toBeCalledWith(expect.any(AccessTokenCreatedEvent));
@@ -110,7 +110,7 @@ describe('Create AccessToken Command Handler', () => {
         exp: exp,
         iat: Date.now(),
         scopes: ['app-1', 'app-2']
-      } as OAuth2Request)
+      } as TokenRequest)
     );
 
     expect(serviceSpy).toBeCalledWith(
@@ -136,7 +136,7 @@ describe('Create AccessToken Command Handler', () => {
         exp: exp,
         iat: Date.now(),
         scopes: ['app-1', 'app-2']
-      } as OAuth2Request)
+      } as TokenRequest)
     );
 
     expect(serviceSpy).toBeCalledWith(
@@ -166,7 +166,7 @@ describe('Create AccessToken Command Handler', () => {
           exp: exp,
           iat: Date.now(),
           scopes: ['app-1', 'app-2']
-        } as OAuth2Request,
+        } as TokenRequest,
         'user-1'
       )
     );

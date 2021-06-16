@@ -1,9 +1,9 @@
 import { HttpException, Injectable, Type } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Oauth2GrantStrategyInterface } from 'apps/tokens/domain/strategies';
-import { OAuth2Request, OAuth2Response } from 'apps/tokens/application/dtos';
+import { Oauth2GrantStrategyInterface } from 'apps/@core/protocols';
+import { TokenRequest, TokenResponse } from 'apps/tokens/application/dtos';
 import { ClientEntity } from 'apps/tokens/infrastructure/entities';
-import { OAUTH2_STRATEGY_METADATA } from './strategy.constants';
+import { TOKEN_STRATEGY_METADATA } from 'app.constants';
 
 export type Oauth2GrantStrategyType = Type<Oauth2GrantStrategyInterface>;
 
@@ -11,7 +11,7 @@ export type Oauth2GrantStrategyType = Type<Oauth2GrantStrategyInterface>;
  * This is the main class used to execute strategies
  */
 @Injectable()
-export class Oauth2GrantStrategyRegistry {
+export class StrategyRegistry {
   /**
    * Store all available granted strategy
    */
@@ -49,7 +49,7 @@ export class Oauth2GrantStrategyRegistry {
    * @param request
    * @param client
    */
-  async validate(request: OAuth2Request, client: ClientEntity): Promise<boolean> {
+  async validate(request: TokenRequest, client: ClientEntity): Promise<boolean> {
     if (!(request.grantType in this.registry)) {
       throw new HttpException(`Cannot find the a strategy for the grant type "${request.grantType}"`, 400);
     }
@@ -63,7 +63,7 @@ export class Oauth2GrantStrategyRegistry {
    * @param request
    * @param client
    */
-  async getOauth2Response(request: OAuth2Request, client: ClientEntity): Promise<OAuth2Response> {
+  async getOauth2Response(request: TokenRequest, client: ClientEntity): Promise<TokenResponse> {
     if (!(request.grantType in this.registry)) {
       throw new HttpException(`Cannot find the a strategy for the grant type "${request.grantType}"`, 400);
     }
@@ -72,6 +72,6 @@ export class Oauth2GrantStrategyRegistry {
   }
 
   private reflectStrategyName(strategy: Oauth2GrantStrategyType): string {
-    return Reflect.getMetadata(OAUTH2_STRATEGY_METADATA, strategy);
+    return Reflect.getMetadata(TOKEN_STRATEGY_METADATA, strategy);
   }
 }
